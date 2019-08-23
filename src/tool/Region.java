@@ -367,16 +367,20 @@ class Chunk {
 		ListTag sections = (ListTag) level.getTag("Sections");
 		
 		CompoundTag heightmaps = (CompoundTag) level.getTag("Heightmaps");
-		LongArrayTag h1 = (LongArrayTag) heightmaps.getTag("MOTION_BLOCKING");
-		LongArrayTag h2 = (LongArrayTag) heightmaps.getTag("MOTION_BLOCKING_NO_LEAVES");
-		LongArrayTag h3 = (LongArrayTag) heightmaps.getTag("OCEAN_FLOOR");
-		LongArrayTag h4 = (LongArrayTag) heightmaps.getTag("WORLD_SURFACE");
+		LongArrayTag h1, h2, h3, h4;
+		h1 = h2 = h3 = h4 = null;
+		if (heightmaps != null) {
+			h1 = (LongArrayTag) heightmaps.getTag("MOTION_BLOCKING");
+			h2 = (LongArrayTag) heightmaps.getTag("MOTION_BLOCKING_NO_LEAVES");
+			h3 = (LongArrayTag) heightmaps.getTag("OCEAN_FLOOR");
+			h4 = (LongArrayTag) heightmaps.getTag("WORLD_SURFACE");
+		}
 		
-		sections.empty();
-		h1.zero();
-		h2.zero();
-		h3.zero();
-		h4.zero();
+		if (sections != null) sections.empty();
+		if (h1 != null) h1.zero();
+		if (h2 != null) h2.zero();
+		if (h3 != null) h3.zero();
+		if (h4 != null) h4.zero();
 	}
 	
 	public int save(Location location) {

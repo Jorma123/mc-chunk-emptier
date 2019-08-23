@@ -385,8 +385,8 @@ public class Panel extends JPanel implements MouseListener, MouseMotionListener,
 			for (Selection sel : selections) {
 				for (int y = sel.start.y; y <= sel.end.y; y++) {
 					for (int x = sel.start.x; x <= sel.end.x; x++) {
-						int regX = x / 32 - (x >>> 31);
-						int regZ = y / 32 - (y >>> 31);
+						int regX = (x - (x >>> 31) * 31) / 32;
+						int regZ = (y - (y >>> 31) * 31) / 32;
 						Region owner = regions[regZ+16][regX+16];
 						if (owner != null) {
 							Chunk chunk = owner.getChunk(x - (regX * 32), y - (regZ * 32));
